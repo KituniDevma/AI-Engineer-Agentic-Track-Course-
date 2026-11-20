@@ -50,7 +50,7 @@ In the **Environment Variables** section of the same page (or later under the se
 
 | Key | Value |
 |---|---|
-| `OPENAI_API_KEY` | your OpenAI key from `.env` |
+| `GOOGLE_API_KEY` | your Google key from `.env` |
 | `PUSHOVER_USER` | your Pushover user from `.env` |
 | `PUSHOVER_TOKEN` | your Pushover token from `.env` |
 | `GRADIO_SERVER_NAME` | `0.0.0.0` |

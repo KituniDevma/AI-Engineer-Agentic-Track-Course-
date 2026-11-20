@@ -4,17 +4,20 @@ from tools import tools, handle_tool_calls
 from styles import CSS, JS, EXAMPLES
 from dotenv import load_dotenv
 import gradio as gr
+import os
 
 load_dotenv(override=True)
 
-MODEL_NAME = "gpt-5.4-mini"
+MODEL_NAME = "gemini-3.5-flash"
+GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
 
-openai = OpenAI()
+openai = OpenAI(base_url=GEMINI_BASE_URL, api_key=os.getenv("GOOGLE_API_KEY"))
 
 system = [{"role": "system", "content": TWIN_SYSTEM_PROMPT}]
 
 
 def chat(message, history):
+    history = [{"role": h["role"], "content": h["content"]} for h in history]
     messages = system + history + [{"role": "user", "content": message}]
     response = openai.chat.completions.create(model=MODEL_NAME, messages=messages, tools=tools)
     while response.choices[0].finish_reason == "tool_calls":
